@@ -6,11 +6,13 @@ import { UtilisateurComponent } from './utilisateur/utilisateur.component';
 import {APIService} from './api.service';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
+import { SondageDisplayComponent } from './sondage-display/sondage-display.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UtilisateurComponent
+    UtilisateurComponent,
+    SondageDisplayComponent
   ],
   imports: [
     HttpClientModule,

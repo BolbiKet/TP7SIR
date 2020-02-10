@@ -1,0 +1,13 @@
+<h1> Sondages </h1>
+
+<label *ngFor="let sondage of this.sondages">
+  <b>Lien : </b>{{sondage.getLien()}} <br>
+  <b>Mail du créateur : </b>{{sondage.getCreateur()}} <br>
+
+  <b> Participants : </b>
+  <label *ngFor="let participant of sondage.getParticipants()">
+    {{participant}}
+  </label>
+  <br>
+  <br>
+</label>
