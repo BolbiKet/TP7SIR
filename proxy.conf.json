@@ -1,9 +1,17 @@
 {
-  "/api": {
-    "target": "http://localhost:8080",
+  "/api/utilisateurs": {
+    "target": "http://localhost:8080/rest/utilisateur",
     "secure": false,
     "pathRewrite": {
-      "^/api": ""
+      "^/api/utilisateurs": ""
+    }
+  },
+
+  "/api/sondages": {
+    "target": "http://localhost:8080/rest/sondage",
+    "secure": false,
+    "pathRewrite": {
+      "^/api/sondages": ""
     }
   }
 }
