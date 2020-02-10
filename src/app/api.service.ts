@@ -7,10 +7,8 @@ interface UtilisateurResults {
   nom?: string;
   prenom?: string;
   mail ?: string;
-}
-
-interface IUtilisateursResults {
-  results?: UtilisateurResults[];
+  lienSondageCrees ?: string[];
+  lienSondageParticipes ?: string[];
 }
 
 @Injectable({

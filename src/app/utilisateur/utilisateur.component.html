@@ -1,7 +1,18 @@
 <h1> Utilisateurs </h1>
 
 <label *ngFor="let utilisateur of this.utilisateurs">
-  {{utilisateur.getNom()}}
-  {{utilisateur.getPrenom()}}
-  {{utilisateur.getMail()}}
+  <b>Nom : </b>{{utilisateur.getNom()}} <br>
+  <b> Prenom : </b>{{utilisateur.getPrenom()}} <br>
+  <b> Mail : </b>{{utilisateur.getMail()}} <br>
+  <b> Sondages crées : </b>
+  <label *ngFor="let sondage of utilisateur.getSondagesCrees()">
+      {{sondage}}
+  </label>
+  <br>
+  <b> Sondages participés : </b>
+  <label *ngFor="let sondage of utilisateur.getSondagesParticipes()">
+    {{sondage}}
+  </label>
+  <br>
+  <br>
 </label>
