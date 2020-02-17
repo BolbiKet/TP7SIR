@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Utilisateur} from './utilisateur';
 import {Observable} from 'rxjs';
-import {Sondage} from "./sondage";
 
 interface UtilisateurResults {
   nom ?: string;
@@ -12,10 +10,18 @@ interface UtilisateurResults {
   lienSondageParticipes ?: string[];
 }
 
-interface SondageResult {
+interface SondagesLieuxResult {
   lien ?: string;
-  utilisateur ?: string;
+  lieux ?: string[];
   participants ?: string[];
+  utilisateur ?: string;
+}
+
+interface SondagesDatesResult {
+  dates ?: string [];
+  lien ?: string;
+  participants ?: string[];
+  utilisateur ?: string;
 }
 @Injectable({
   providedIn: 'root'
@@ -28,7 +34,11 @@ export class APIService {
     return this.httpClient.get<UtilisateurResults[]>('http://localhost:4200/api/utilisateurs');
   }
 
-  getSondages(): Observable<SondageResult[]> {
-    return this.httpClient.get<SondageResult[]>('http://localhost:4200/api/sondages');
+  getSondagesLieux(): Observable<SondagesLieuxResult[]> {
+    return this.httpClient.get<SondagesLieuxResult[]>('http://localhost:4200/api/sondages/sondagesLieux');
+  }
+
+  getSondagesDates(): Observable<SondagesDatesResult[]> {
+    return this.httpClient.get<SondagesDatesResult[]>('http://localhost:4200/api/sondages/sondagesDates');
   }
 }

@@ -1,12 +1,37 @@
 <h1> Sondages </h1>
 
-<label *ngFor="let sondage of this.sondages">
-  <b>Lien : </b>{{sondage.getLien()}} <br>
-  <b>Mail du créateur : </b>{{sondage.getCreateur()}} <br>
+<h2 *ngIf="sondagesLieux != null"> Sondages Lieux </h2>
+<label *ngFor="let sondageL of this.sondagesLieux">
+  <b>Lien : </b>{{sondageL.getLien()}} <br>
+  <b>Mail du créateur : </b>{{sondageL.getCreateur()}} <br>
 
   <b> Participants : </b>
-  <label *ngFor="let participant of sondage.getParticipants()">
+  <label *ngFor="let participant of sondageL.getParticipants()">
     {{participant}}
+  </label>
+  <br>
+  <b> Lieux : </b>
+  <label *ngFor="let lieu of sondageL.getLieux()">
+    {{lieu}}
+  </label>
+  <br>
+  <br>
+</label>
+
+
+<h2 *ngIf="sondagesDates!= null"> Sondages Dates </h2>
+<label *ngFor="let sondageD of this.sondagesDates">
+  <b>Lien : </b>{{sondageD.getLien()}} <br>
+  <b>Mail du créateur : </b>{{sondageD.getCreateur()}} <br>
+
+  <b> Participants : </b>
+  <label *ngFor="let participant of sondageD.getParticipants()">
+    {{participant}}
+  </label>
+  <br>
+  <b> Dates : </b>
+  <label *ngFor="let date of sondageD.getDates()">
+    {{date}}
   </label>
   <br>
   <br>

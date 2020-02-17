@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Sondage} from '../sondage';
 import {APIService} from '../api.service';
+import {SondageLieu} from '../sondage-lieu';
+import {SondageDate} from '../sondage-date';
+import {iterator} from "rxjs/internal-compatibility";
 
 @Component({
   selector: 'app-sondage-display',
@@ -9,13 +11,18 @@ import {APIService} from '../api.service';
 })
 export class SondageDisplayComponent implements OnInit {
 
-  sondages: Sondage[];
+  sondagesLieux: SondageLieu[];
+  sondagesDates: SondageDate[];
 
   constructor(private apiService: APIService) { }
 
   ngOnInit() {
-    this.apiService.getSondages().subscribe(res =>{
-      this.sondages = res.map(item => new Sondage(item.lien, item.utilisateur, item.participants));
+    this.apiService.getSondagesDates().subscribe(res => {
+      this.sondagesDates = res.map (item => new SondageDate(item.lien,item.utilisateur, item.participants, item.dates));
+    });
+
+    this.apiService.getSondagesLieux().subscribe(res =>{
+      this.sondagesLieux = res.map(item => new SondageLieu(item.lien, item.utilisateur, item.participants, item.lieux));
     });
   }
 

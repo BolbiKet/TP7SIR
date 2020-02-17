@@ -13,5 +13,21 @@
     "pathRewrite": {
       "^/api/sondages": ""
     }
+  },
+
+  "/api/sondages/sondagesDates": {
+    "target": "http://localhost:8080/rest/sondage/sondagesDates",
+    "secure": false,
+    "pathRewrite": {
+      "^/api/sondages/sondagesDates": ""
+    }
+  },
+
+  "/api/sondages/sondagesLieux": {
+    "target": "http://localhost:8080/rest/sondage/sondagesLieux",
+    "secure": false,
+    "pathRewrite": {
+      "^/api/sondages/sondagesLieux": ""
+    }
   }
 }
