@@ -7,12 +7,14 @@ import {APIService} from './api.service';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import { SondageDisplayComponent } from './sondage-display/sondage-display.component';
+import { UtilisateurCreationComponent } from './utilisateur-creation/utilisateur-creation.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UtilisateurComponent,
-    SondageDisplayComponent
+    SondageDisplayComponent,
+    UtilisateurCreationComponent
   ],
   imports: [
     HttpClientModule,

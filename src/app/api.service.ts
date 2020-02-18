@@ -41,4 +41,8 @@ export class APIService {
   getSondagesDates(): Observable<SondagesDatesResult[]> {
     return this.httpClient.get<SondagesDatesResult[]>('http://localhost:4200/api/sondages/sondagesDates');
   }
+
+  createUser(user) {
+    return this.httpClient.post('http://localhost:4200/api/utilisateurs', user);
+  }
 }

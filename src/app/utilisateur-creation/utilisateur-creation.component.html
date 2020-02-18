@@ -1,0 +1,21 @@
+<h1> Creation d'un utilisateur </h1>
+<form>
+  <div>
+    <label for="Nom"> Nom : </label>
+    <input type="text" [(ngModel)]="nomU" name="Nom">
+  </div>
+
+  <div>
+    <label for="Prenom"> Prénom : </label>
+    <input type="text" [(ngModel)]="prenomU" name="Prenom">
+  </div>
+
+
+  <div>
+    <label for="Mail"> Mail : </label>
+    <input type="text" [(ngModel)]="mailU" name="Mail">
+  </div>
+
+  <button (click)="saveUser()">Valider </button>
+
+</form>

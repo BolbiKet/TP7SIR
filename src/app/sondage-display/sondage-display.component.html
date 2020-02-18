@@ -1,6 +1,6 @@
 <h1> Sondages </h1>
 
-<h2 *ngIf="sondagesLieux != null"> Sondages Lieux </h2>
+<h2> Sondages Lieux </h2>
 <label *ngFor="let sondageL of this.sondagesLieux">
   <b>Lien : </b>{{sondageL.getLien()}} <br>
   <b>Mail du créateur : </b>{{sondageL.getCreateur()}} <br>
@@ -19,7 +19,7 @@
 </label>
 
 
-<h2 *ngIf="sondagesDates!= null"> Sondages Dates </h2>
+<h2> Sondages Dates </h2>
 <label *ngFor="let sondageD of this.sondagesDates">
   <b>Lien : </b>{{sondageD.getLien()}} <br>
   <b>Mail du créateur : </b>{{sondageD.getCreateur()}} <br>

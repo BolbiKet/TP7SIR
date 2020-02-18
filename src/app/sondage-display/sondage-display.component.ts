@@ -18,7 +18,7 @@ export class SondageDisplayComponent implements OnInit {
 
   ngOnInit() {
     this.apiService.getSondagesDates().subscribe(res => {
-      this.sondagesDates = res.map (item => new SondageDate(item.lien,item.utilisateur, item.participants, item.dates));
+      this.sondagesDates = res.map (item => new SondageDate(item.lien, item.utilisateur, item.participants, item.dates));
     });
 
     this.apiService.getSondagesLieux().subscribe(res =>{
