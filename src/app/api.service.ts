@@ -45,4 +45,8 @@ export class APIService {
   createUser(user) {
     return this.httpClient.post('http://localhost:4200/api/utilisateurs', user);
   }
+
+  createSondageLieu(sondageLieu) {
+    return this.httpClient.post('http://localhost:4200/api/sondages/sondagesLieux', sondageLieu);
+  }
 }

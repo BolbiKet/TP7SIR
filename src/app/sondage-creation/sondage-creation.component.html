@@ -1,0 +1,34 @@
+<h2> Création d'un sondage </h2>
+
+<form>
+  <div>
+    <label> Lien du sondage :
+      <input type="text" [(ngModel)]="lienS" name="lien">
+    </label>
+  </div>
+
+  <div>
+    <label> Votre Mail :
+      <input type="text" [(ngModel)]="mailC" name="lien">
+    </label>
+  </div>
+
+  <div>
+    <label> Lieu 1 :
+      <input type="text" [(ngModel)]="lieuR1" name="lieu1">
+    </label>
+  </div>
+  <div>
+    <label> Lieu 2 :
+      <input type="text" [(ngModel)]="lieuR2" name="lieu2">
+    </label>
+  </div>
+  <div>
+    <label> Lieu 3 :
+      <input type="text" [(ngModel)]="lieuR3" name="lieu3">
+    </label>
+  </div>
+
+
+  <button (click)="createSondage()">Valider </button>
+</form>
