@@ -1,9 +1,11 @@
+import {Utilisateur} from './utilisateur';
+
 export class SondageLieu {
-  constructor(private lien: string, private createur: string, private participants: string[], private lieux: string[]) {}
+  constructor(private lien: string, private createur: Utilisateur, private participants: string[], private lieux: string[]) {}
   getLien(): string {
     return this.lien;
   }
-  getCreateur(): string {
+  getCreateur(): Utilisateur {
     return this.createur;
   }
   getParticipants(): string[] {

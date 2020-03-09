@@ -9,6 +9,8 @@ import {FormsModule} from '@angular/forms';
 import { SondageDisplayComponent } from './sondage-display/sondage-display.component';
 import { UtilisateurCreationComponent } from './utilisateur-creation/utilisateur-creation.component';
 import { SondageCreationComponent } from './sondage-creation/sondage-creation.component';
+import {RouterModule} from "@angular/router";
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -18,11 +20,13 @@ import { SondageCreationComponent } from './sondage-creation/sondage-creation.co
     UtilisateurCreationComponent,
     SondageCreationComponent
   ],
-  imports: [
-    HttpClientModule,
-    FormsModule,
-    BrowserModule
-  ],
+    imports: [
+        HttpClientModule,
+        FormsModule,
+        BrowserModule,
+        RouterModule,
+        AppRoutingModule
+    ],
   providers: [APIService],
   bootstrap: [AppComponent]
 })

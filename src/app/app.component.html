@@ -1,7 +1,17 @@
-<div style="text-align:center">
-  <h1>{{title}}</h1>
-</div>
-<app-sondage-creation></app-sondage-creation>
-<app-utilisateur-creation></app-utilisateur-creation>
-<app-utilisateur></app-utilisateur>
-<app-sondage-display></app-sondage-display>
+<header>
+  <section style="text-align:center">
+    <h1>{{title}}</h1>
+  </section>
+  <nav>
+   <ul>
+     <li><a routerLink="/utilisateur"> Créer un utilisateur </a> </li>
+     <li><a routerLink="/utilisateurs"> Afficher les utilisateurs  </a> </li>
+     <li><a routerLink="/sondage">Créer un sondage </a> </li>
+     <li><a routerLink="/sondages">Afficher les sondages </a> </li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <router-outlet></router-outlet>
+</main>

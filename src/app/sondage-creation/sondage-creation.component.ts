@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SondageLieu} from "../sondage-lieu";
 import {APIService} from "../api.service";
+import {Utilisateur} from "../utilisateur";
 
 @Component({
   selector: 'app-sondage-creation',
@@ -22,7 +23,8 @@ export class SondageCreationComponent implements OnInit {
 
   createSondage() {
     const lieux: string[] = [this.lieuR1, this.lieuR2, this.lieuR3];
-    const sondageL: SondageLieu = new SondageLieu(this.lienS, this.mailC, null, lieux);
+    const utilisateur: Utilisateur = new Utilisateur(null, null, this.mailC, null, null);
+    const sondageL: SondageLieu = new SondageLieu(this.lienS, utilisateur, null, lieux);
     this.apiService.createSondageLieu(sondageL);
   }
 
