@@ -1,21 +1,21 @@
 <h1> Creation d'un utilisateur </h1>
 <form>
-  <div>
+  <div class="form-group">
     <label for="Nom"> Nom : </label>
     <input type="text" [(ngModel)]="nomU" name="Nom">
   </div>
 
-  <div>
+  <div class="form-group">
     <label for="Prenom"> Prénom : </label>
     <input type="text" [(ngModel)]="prenomU" name="Prenom">
   </div>
 
 
-  <div>
+  <div class="form-group">
     <label for="Mail"> Mail : </label>
-    <input type="text" [(ngModel)]="mailU" name="Mail">
+    <input type="email" [(ngModel)]="mailU" name="Mail">
   </div>
 
-  <button (click)="saveUser()">Valider </button>
+  <button type="submit" class="btn btn-primary" (click)="saveUser()">Valider </button>
 
 </form>
