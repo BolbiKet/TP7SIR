@@ -2,10 +2,6 @@
 
 <h2> Sondages Lieux </h2>
 
-<div *ngIf="this.sondagesLieux.length == 0">
-  <label>Aucun sondage de type lieu </label>
-</div>
-
 <div>
   <label *ngFor="let sondageL of this.sondagesLieux">
     <b>Lien : </b>{{sondageL.getLien()}} <br>
@@ -25,10 +21,6 @@
 
 
 <h2> Sondages Dates </h2>
-
-<div *ngIf="this.sondagesDates.length == 0">
-  <label>Aucun sondage de type date </label>
-</div>
 
 <div>
   <label *ngFor="let sondageD of this.sondagesDates">

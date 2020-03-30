@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {APIService} from '../api.service';
 import {SondageLieu} from '../sondage-lieu';
 import {SondageDate} from '../sondage-date';
-import {iterator} from "rxjs/internal-compatibility";
 
 @Component({
   selector: 'app-sondage-display',

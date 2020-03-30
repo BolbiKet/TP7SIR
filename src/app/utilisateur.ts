@@ -1,11 +1,9 @@
 export class Utilisateur {
-
   constructor(private nom: string, private prenom: string, private mail: string, private sondagesCrees: string[], private sondagesParticipes: string[]) {}
 
   getNom(): string {
     return this.nom;
   }
-
   getPrenom(): string {
     return this.prenom;
   }
@@ -15,7 +13,7 @@ export class Utilisateur {
   getSondages(): string[] {
     return this.sondagesParticipes;
   }
-  getSondagesCrees(): string[]{
+  getSondagesCrees(): string[] {
     return this.sondagesCrees;
   }
 }

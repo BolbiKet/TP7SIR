@@ -3,6 +3,8 @@ import {SondageLieu} from "../sondage-lieu";
 import {APIService} from "../api.service";
 import {Utilisateur} from "../utilisateur";
 import {SondageDate} from "../sondage-date";
+import {LieuReunion} from "../lieu-reunion";
+import {DateReunion} from "../date-reunion";
 
 @Component({
   selector: 'app-sondage-creation',
@@ -27,15 +29,35 @@ export class SondageCreationComponent implements OnInit {
   }
 
   createSondage() {
+    const utilisateur: Utilisateur = new Utilisateur(null, null, this.mailC, null, null);
     if (this.typeS === 'lieu') {
-      const lieux: string[] = [this.lieuR1, this.lieuR2, this.lieuR3];
-      const sondageL: SondageLieu = new SondageLieu(this.lienS, this.mailC, null, lieux);
-      this.apiService.createSondageLieu(sondageL);
+      this.createSondageLieu(utilisateur);
     } else {
-      const dates: string[] = [this.date1, this.date2, this.date3];
-      const sondageD: SondageDate = new SondageDate(this.lienS, this.mailC, null, dates);
-      this.apiService.createSondageDate(sondageD);
+      this.createSondageDate(utilisateur);
     }
+  }
+
+  private createSondageLieu(utilisateur) {
+    const lieu1: LieuReunion = new LieuReunion(this.lieuR1);
+    const lieu2: LieuReunion = new LieuReunion(this.lieuR2);
+    const lieu3: LieuReunion = new LieuReunion(this.lieuR3);
+    const lieux: LieuReunion[] = [lieu1, lieu2, lieu3];
+
+    const sondageL: SondageLieu = new SondageLieu(this.lienS, utilisateur, null, lieux);
+    this.apiService.createSondageLieu(sondageL).subscribe(data => {
+      console.log ('Sondage de type lieu crée : ' + data.lien);
+    });
+  }
+
+  private createSondageDate(utilisateur) {
+    const dateR1: DateReunion = new DateReunion(this.date1);
+    const dateR2: DateReunion = new DateReunion(this.date2);
+    const dateR3: DateReunion = new DateReunion(this.date3);
+    const dates: DateReunion[] = [dateR1, dateR2, dateR3];
+    const sondageD: SondageDate = new SondageDate(this.lienS, utilisateur, null, dates);
+    this.apiService.createSondageDate(sondageD).subscribe(data => {
+      console.log('Sondage de type date crée : ' + data.lien);
+    });
   }
 
 }

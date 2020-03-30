@@ -11,6 +11,7 @@ import { UtilisateurCreationComponent } from './utilisateur-creation/utilisateur
 import { SondageCreationComponent } from './sondage-creation/sondage-creation.component';
 import {RouterModule} from "@angular/router";
 import { AppRoutingModule } from './app-routing.module';
+import { SondageParticipationComponent } from './sondage-participation/sondage-participation.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AppRoutingModule } from './app-routing.module';
     UtilisateurComponent,
     SondageDisplayComponent,
     UtilisateurCreationComponent,
-    SondageCreationComponent
+    SondageCreationComponent,
+    SondageParticipationComponent
   ],
     imports: [
         HttpClientModule,
