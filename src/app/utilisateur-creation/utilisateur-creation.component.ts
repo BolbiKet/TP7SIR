@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Utilisateur} from "../utilisateur";
-import {APIService} from "../api.service";
-import {Subject} from "rxjs";
-import {debounceTime} from "rxjs/operators";
+import {Utilisateur} from '../utilisateur';
+import {APIService} from '../api.service';
+import {Subject} from 'rxjs';
+import {NgForm} from '@angular/forms';
+import {NgDecorator} from "@angular/core/schematics/utils/ng_decorators";
 
 @Component({
   selector: 'app-utilisateur-creation',
@@ -15,9 +16,7 @@ export class UtilisateurCreationComponent implements OnInit {
   prenomU: string = '';
   mailU: string = '';
   utilisateur: Utilisateur;
-  sucess = new Subject<string>();
-  alertClosed = true;
-  sucessMessage = 'Utilisateur crée';
+  patternEmail = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
 
   constructor(private apiService: APIService) {
   }
@@ -25,11 +24,15 @@ export class UtilisateurCreationComponent implements OnInit {
   ngOnInit() {
   }
 
-  saveUser() {
+  saveUser(utilisateurForm: NgForm) {
     this.utilisateur = new Utilisateur(this.nomU, this.prenomU, this.mailU, null, null);
     this.apiService.createUser(this.utilisateur).subscribe(data => {
       console.log('Utilisateur crée :' + data.mail);
+      this.resetForm(utilisateurForm);
     });
+  }
+  resetForm(utilisateurForm: NgForm) {
+    utilisateurForm.resetForm();
   }
 }
 

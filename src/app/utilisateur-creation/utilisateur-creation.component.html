@@ -1,5 +1,5 @@
 <h1> Creation d'un utilisateur </h1>
-<form>
+<form #utilisateurForm="ngForm" (ngSubmit)="saveUser(utilisateurForm)">
   <div class="form-group">
     <label for="Nom"> Nom : </label>
     <input type="text" [(ngModel)]="nomU" name="Nom">
@@ -12,10 +12,29 @@
 
 
   <div class="form-group">
-    <label for="Mail"> Mail : </label>
-    <input type="email" [(ngModel)]="mailU" name="Mail">
+    <label for="mail"> Mail : </label>
+    <input type="email" [(ngModel)]="mailU" name="mail" [pattern]="patternEmail" #emailU="ngModel" required>
   </div>
 
-  <button type="submit" class="btn btn-primary" (click)="saveUser()">Valider </button>
+
+  <div *ngIf="emailU.errors?.required">
+    <span class="text-danger">
+      L'email est obligatoire
+    </span>
+  </div>
+
+  <div *ngIf="emailU.errors?.pattern">
+    <span class="text-danger">
+      Le format de l'email est invalide
+    </span>
+  </div>
+  <br>
+
+  <div class="form-group">
+    <button class="btn btn-primary" [disabled]="!utilisateurForm.form.valid"> Valider </button>
+     &nbsp;
+    <button type="button" class="btn btn-danger" (click)="resetForm(utilisateurForm)"> Vider les champs</button>
+  </div>
+
 
 </form>
