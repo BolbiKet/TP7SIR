@@ -9,7 +9,7 @@ import {FormsModule} from '@angular/forms';
 import { SondageDisplayComponent } from './sondage-display/sondage-display.component';
 import { UtilisateurCreationComponent } from './utilisateur-creation/utilisateur-creation.component';
 import { SondageCreationComponent } from './sondage-creation/sondage-creation.component';
-import {RouterModule} from "@angular/router";
+import {RouterModule} from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { SondageParticipationComponent } from './sondage-participation/sondage-participation.component';
 

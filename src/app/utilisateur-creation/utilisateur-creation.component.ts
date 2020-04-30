@@ -25,7 +25,7 @@ export class UtilisateurCreationComponent implements OnInit {
   }
 
   saveUser(utilisateurForm: NgForm) {
-    this.utilisateur = new Utilisateur(this.nomU, this.prenomU, this.mailU, null, null);
+    this.utilisateur = new Utilisateur(this.nomU, this.prenomU, this.mailU, null);
     this.apiService.createUser(this.utilisateur).subscribe(data => {
       console.log('Utilisateur crée :' + data.mail);
       this.resetForm(utilisateurForm);

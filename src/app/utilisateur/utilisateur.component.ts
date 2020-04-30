@@ -14,7 +14,7 @@ export class UtilisateurComponent implements OnInit {
 
   ngOnInit() {
     this.apiService.getUtilisateurs().subscribe( res => {
-      this.utilisateurs = res.map(item => new Utilisateur(item.nom, item.prenom, item.mail, item.lienSondageCrees, item.lienSondageParticipes));
+      this.utilisateurs = res.map(item => new Utilisateur(item.nom, item.prenom, item.mail, item.lienSondageCrees));
     });
   }
 }

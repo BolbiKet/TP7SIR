@@ -26,12 +26,6 @@
   <label *ngFor="let sondageD of this.sondagesDates">
     <b>Lien : </b>{{sondageD.getLien()}} <br>
     <b>Mail du créateur : </b>{{sondageD.getCreateur()}} <br>
-
-    <b> Participants : </b>
-    <label *ngFor="let participant of sondageD.getParticipants()">
-      {{participant}}
-    </label>
-    <br>
     <b> Dates : </b>
     <label *ngFor="let date of sondageD.getDates()">
       {{date}} &nbsp;
