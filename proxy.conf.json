@@ -19,5 +19,54 @@
     "pathRewrite": {
       "^/api/sondagesDates": ""
     }
+  },
+
+  "/api/participationSondageLieux": {
+    "target": "http://localhost:8080/rest/participation/sondageLieux",
+    "secure": false,
+    "pathRewrite": {
+      "^/api/participationSondageLieux": ""
+    }
+  },
+
+  "/api/participationSondageDates": {
+    "target": "http://localhost:8080/rest/participation/sondageDates",
+    "secure": false,
+    "pathRewrite": {
+      "^/api/participationSondageDates": ""
+    }
+  },
+
+  "/api/lieux": {
+    "target": "http://localhost:8080/rest/sondage/lieux",
+    "secure": false,
+    "pathRewrite": {
+      "^/api/lieux": ""
+    }
+  },
+
+  "/api/dates": {
+    "target": "http://localhost:8080/rest/sondage/dates",
+    "secure": false,
+    "pathRewrite": {
+      "^/api/dates": ""
+    }
+  },
+
+
+  "/api/lieu": {
+    "target": "http://localhost:8080/rest/sondage/lieu",
+    "secure": false,
+    "pathRewrite": {
+      "^/api/lieu": ""
+    }
+  },
+
+  "/api/date": {
+    "target": "http://localhost:8080/rest/sondage/date",
+    "secure": false,
+    "pathRewrite": {
+      "^/api/date": ""
+    }
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {APIService} from '../api.service';
-import {Utilisateur} from '../utilisateur';
+import {Utilisateur} from '../classes/utilisateur';
 
 @Component({
   selector: 'app-utilisateur',

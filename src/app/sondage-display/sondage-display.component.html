@@ -6,15 +6,10 @@
   <label *ngFor="let sondageL of this.sondagesLieux">
     <b>Lien : </b>{{sondageL.getLien()}} <br>
     <b>Mail du créateur : </b>{{sondageL.getCreateur()}} <br>
-
-    <b> Participants : </b>
-    <label *ngFor="let participant of sondageL.getParticipants()">
-      {{participant}}
-    </label>
     <br>
     <b> Lieux : </b>
     <label *ngFor="let lieu of sondageL.getLieux()">
-      {{lieu}} &nbsp;
+      {{lieu.getNomLieu()}} &nbsp;
     </label>
   </label>
 </div>
@@ -28,7 +23,7 @@
     <b>Mail du créateur : </b>{{sondageD.getCreateur()}} <br>
     <b> Dates : </b>
     <label *ngFor="let date of sondageD.getDates()">
-      {{date}} &nbsp;
+      {{date.getDate()}} &nbsp;
     </label>
   </label>
 </div>

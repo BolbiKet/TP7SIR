@@ -66,12 +66,12 @@
       </label>
       <div>
         <input type="checkbox" id="pauseDej3" name="pauseDej3" [(ngModel)]="pauseDej3">
-        <label for="pauseDej3">Sondage de type Lieu</label>
+        <label for="pauseDej3">Contient une pause déjeuner </label>
       </div>
     </div>
     <div *ngIf="dateUne.errors?.pattern || dateDeux.errors?.pattern || dateTrois.errors?.pattern">
       <span class="text-danger">
-         Le format de date attendu est dd/mm/yyyy
+         Le format de date attendu est dd-mm-yyyy
       </span>
     </div>
   </div>

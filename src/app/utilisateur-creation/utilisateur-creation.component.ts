@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Utilisateur} from '../utilisateur';
+import {Utilisateur} from '../classes/utilisateur';
 import {APIService} from '../api.service';
 import {Subject} from 'rxjs';
 import {NgForm} from '@angular/forms';

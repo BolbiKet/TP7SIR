@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {SondageLieu} from '../sondage-lieu';
+import {SondageLieu} from '../classes/sondage-lieu';
 import {APIService} from '../api.service';
-import {Utilisateur} from '../utilisateur';
-import {SondageDate} from '../sondage-date';
-import {LieuReunion} from '../lieu-reunion';
-import {DateReunion} from '../date-reunion';
+import {Utilisateur} from '../classes/utilisateur';
+import {SondageDate} from '../classes/sondage-date';
+import {LieuReunion} from '../classes/lieu-reunion';
+import {DateReunion} from '../classes/date-reunion';
 import {NgForm} from '@angular/forms';
 
 @Component({
@@ -14,20 +14,20 @@ import {NgForm} from '@angular/forms';
 })
 export class SondageCreationComponent implements OnInit {
 
-  lienS: string = '';
-  mailC: string = '';
-  lieuR1: string = '';
-  lieuR2: string = '';
-  lieuR3: string = '';
-  typeS: string = '';
-  date1: string = '';
-  date2: string = '';
-  date3: string = '';
-  pauseDej1: boolean = false;
-  pauseDej2: boolean = false;
-  pauseDej3: boolean = false;
+  lienS = '';
+  mailC = '';
+  lieuR1 = '';
+  lieuR2 = '';
+  lieuR3 = '';
+  typeS = '';
+  date1 = '';
+  date2 = '';
+  date3 = '';
+  pauseDej1 = false;
+  pauseDej2 = false;
+  pauseDej3 = false;
   patternEmail = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}$';
-  patternDate = '^[0-9]{2}/[0-9]{2}/[0-9]{4}$';
+  patternDate = '^[0-9]{2}-[0-9]{2}-[0-9]{4}$';
 
   constructor(private apiService: APIService) { }
 
@@ -46,9 +46,9 @@ export class SondageCreationComponent implements OnInit {
   }
 
   private createSondageLieu(utilisateur, sondageForm: NgForm) {
-    const lieu1: LieuReunion = new LieuReunion(this.lieuR1);
-    const lieu2: LieuReunion = new LieuReunion(this.lieuR2);
-    const lieu3: LieuReunion = new LieuReunion(this.lieuR3);
+    const lieu1: LieuReunion = new LieuReunion(this.lieuR1, null);
+    const lieu2: LieuReunion = new LieuReunion(this.lieuR2,null);
+    const lieu3: LieuReunion = new LieuReunion(this.lieuR3, null);
     const lieux: LieuReunion[] = [lieu1, lieu2, lieu3];
 
     const sondageL: SondageLieu = new SondageLieu(this.lienS, utilisateur, lieux);
@@ -59,9 +59,9 @@ export class SondageCreationComponent implements OnInit {
   }
 
   private createSondageDate(utilisateur, sondageForm: NgForm) {
-    const dateR1: DateReunion = new DateReunion(this.date1, this.pauseDej1);
-    const dateR2: DateReunion = new DateReunion(this.date2, this.pauseDej2);
-    const dateR3: DateReunion = new DateReunion(this.date3, this.pauseDej3);
+    const dateR1: DateReunion = new DateReunion(this.date1, this.pauseDej1, null);
+    const dateR2: DateReunion = new DateReunion(this.date2, this.pauseDej2, null);
+    const dateR3: DateReunion = new DateReunion(this.date3, this.pauseDej3, null);
     const dates: DateReunion[] = [dateR1, dateR2, dateR3];
     const sondageD: SondageDate = new SondageDate(this.lienS, utilisateur, dates);
     this.apiService.createSondageDate(sondageD).subscribe(data => {
@@ -69,6 +69,7 @@ export class SondageCreationComponent implements OnInit {
       this.resetForm(sondageForm);
     });
   }
+
   resetForm(sondageForm: NgForm) {
     sondageForm.resetForm();
   }
