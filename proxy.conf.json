@@ -37,6 +37,21 @@
     }
   },
 
+  "/api/participationSondageLieux/count": {
+    "target": "http://localhost:8080/rest/participation/sondageLieux/count",
+    "secure": false,
+    "pathRewrite": {
+      "^/api/participationSondageLieux/count": ""
+    }
+  },
+  "/api/participationSondageDates/count": {
+    "target": "http://localhost:8080/rest/participation/sondageDates/count",
+    "secure": false,
+    "pathRewrite": {
+      "^/api/participationSondageDates/count": ""
+    }
+  },
+
   "/api/lieux": {
     "target": "http://localhost:8080/rest/sondage/lieux",
     "secure": false,

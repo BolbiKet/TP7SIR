@@ -42,6 +42,12 @@ export class APIService {
   getSondageDatesByLien(lienSondage: string): Observable<SondagesDatesResult> {
     return this.httpClient.get<SondagesDatesResult>(this.url + 'sondagesDates/' + lienSondage);
   }
+  getCountParticipationSL(): Observable<any> {
+    return this.httpClient.get<any>(this.url + 'participationSondageLieux/count');
+  }
+  getCountParticipationSD(): Observable<any> {
+    return this.httpClient.get<any>(this.url + 'participationSondageDates/count');
+  }
 
   // POST methods
   createUser(user: Utilisateur): Observable<UtilisateurResults> {

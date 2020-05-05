@@ -12,6 +12,7 @@ import { SondageCreationComponent } from './sondage-creation/sondage-creation.co
 import {RouterModule} from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { SondageParticipationComponent } from './sondage-participation/sondage-participation.component';
+import { ResultSondageComponent } from './result-sondage/result-sondage.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { SondageParticipationComponent } from './sondage-participation/sondage-p
     SondageDisplayComponent,
     UtilisateurCreationComponent,
     SondageCreationComponent,
-    SondageParticipationComponent
+    SondageParticipationComponent,
+    ResultSondageComponent
   ],
     imports: [
         HttpClientModule,
