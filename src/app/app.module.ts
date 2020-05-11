@@ -13,6 +13,9 @@ import {RouterModule} from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { SondageParticipationComponent } from './sondage-participation/sondage-participation.component';
 import { ResultSondageComponent } from './result-sondage/result-sondage.component';
+import { AddAllergiesComponent } from './add-allergies/add-allergies.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -22,14 +25,16 @@ import { ResultSondageComponent } from './result-sondage/result-sondage.componen
     UtilisateurCreationComponent,
     SondageCreationComponent,
     SondageParticipationComponent,
-    ResultSondageComponent
+    ResultSondageComponent,
+    AddAllergiesComponent
   ],
     imports: [
-        HttpClientModule,
-        FormsModule,
-        BrowserModule,
-        RouterModule,
-        AppRoutingModule
+      HttpClientModule,
+      FormsModule,
+      BrowserModule,
+      RouterModule,
+      AppRoutingModule,
+      NgbModule
     ],
   providers: [APIService],
   bootstrap: [AppComponent]

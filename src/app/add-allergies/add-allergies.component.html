@@ -1,0 +1,74 @@
+<form #allergyForm="ngForm" (ngSubmit)="saveAllergies(allergyForm)" class="text-center">
+
+  <h1 class="h4 mb-4">Renseignement des allergies et préférences alimentaires d'un utilisateur</h1>
+
+  <div class="form-group mb-4">
+    <label for="mail"> Mail : </label>
+    <input type="text" [(ngModel)]="mailU" id="mail" name="mail" [pattern]="patternEmail" #emailU="ngModel" required>
+  </div>
+
+  <div *ngIf="emailU.errors?.required">
+    <span class="text-danger">
+      L'email est obligatoire
+    </span>
+  </div>
+
+  <div *ngIf="emailU.errors?.pattern">
+    <span class="text-danger">
+      Le format de l'email est invalide
+    </span>
+  </div>
+  <br>
+
+  <p class="h4 mb-4">Allergies </p>
+
+  <div class="form-group mb-4">
+    <label for="allergie1"> Allergie 1 : </label>
+    <input type="text" [(ngModel)]="allergie1" name="allergie1" id="allergie1" required>
+  </div>
+
+  <div class="form-group mb-4">
+    <label for="allergie2"> Allergie 2 : </label>
+    <input type="text" [(ngModel)]="allergie2" id="allergie2" name="allergie2">
+  </div>
+
+  <div class="form-group mb-4">
+    <label for="allergie3"> Allergie 3 : </label>
+    <input type="email" [(ngModel)]="allergie3" id="allergie3" name="allergie3">
+  </div>
+
+  <div class="form-group">
+    <button class="btn btn-primary" [disabled]="!allergyForm.form.valid"> Valider </button>
+    <button type="button" class="btn btn-danger" (click)="resetForm(allergyForm)"> Vider les champs</button>
+  </div>
+</form>
+
+<br>
+
+<form #preferencesForm="ngForm" (ngSubmit)="savePref(preferencesForm)" class="text-center">
+  <p class="h4 mb-4"> Préfèrences alimentaires  </p>
+
+  <div class="form-group mb-4">
+    <label for="pref1"> Préférence alimentaire 1 : </label>
+    <input type="text" [(ngModel)]="prefA1" name="pref1" id="pref1" required>
+  </div>
+
+  <div class="form-group mb-4">
+    <label for="pref2"> Préférence alimentaire 2 : </label>
+    <input type="text" [(ngModel)]="prefA2" id="pref2" name="pref2" required>
+  </div>
+
+  <div class="form-group mb-4">
+    <label for="pref3"> Préférence alimentaire 3 : </label>
+    <input type="text" [(ngModel)]="prefA3" id="pref3" name="pref3" required>
+  </div>
+
+
+  <div class="form-group">
+    <button class="btn btn-primary" [disabled]="!preferencesForm.form.valid"> Valider </button>
+    <button type="button" class="btn btn-danger" (click)="resetForm(preferencesForm)"> Vider les champs</button>
+  </div>
+
+
+</form>
+

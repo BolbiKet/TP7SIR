@@ -6,6 +6,8 @@ import {SondageDate} from '../classes/sondage-date';
 import {LieuReunion} from '../classes/lieu-reunion';
 import {DateReunion} from '../classes/date-reunion';
 import {NgForm} from '@angular/forms';
+import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date-struct';
+import {NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-sondage-creation',
@@ -14,58 +16,59 @@ import {NgForm} from '@angular/forms';
 })
 export class SondageCreationComponent implements OnInit {
 
-  lienS = '';
+  linkS = '';
   mailC = '';
-  lieuR1 = '';
-  lieuR2 = '';
-  lieuR3 = '';
+  placeR1 = '';
+  placeR2 = '';
+  placeR3 = '';
   typeS = '';
-  date1 = '';
-  date2 = '';
-  date3 = '';
-  pauseDej1 = false;
-  pauseDej2 = false;
-  pauseDej3 = false;
-  patternEmail = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}$';
-  patternDate = '^[0-9]{2}-[0-9]{2}-[0-9]{4}$';
+  date1: NgbDateStruct;
+  date2: NgbDateStruct;
+  date3: NgbDateStruct;
+  break1 = false;
+  break2 = false;
+  break3 = false;
+  patternEmail = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
+  date: {year: number, month: number};
+  today = this.calendar.getToday();
 
-  constructor(private apiService: APIService) { }
+  constructor(private apiService: APIService, private calendar: NgbCalendar) { }
 
   ngOnInit() {
   }
 
   createSondage(sondageForm: NgForm) {
     this.apiService.getUtilisateur(this.mailC).subscribe(data => {
-      const utilisateur: Utilisateur = new Utilisateur(data.nom, data.prenom, data.mail, null);
+      const user = new Utilisateur(data.nom, data.prenom, data.mail);
       if (this.typeS === 'lieu') {
-        this.createSondageLieu(utilisateur, sondageForm);
+        this.createSondageLieu(user, sondageForm);
       } else {
-        this.createSondageDate(utilisateur, sondageForm);
+        this.createSondageDate(user, sondageForm);
       }
     });
   }
 
-  private createSondageLieu(utilisateur, sondageForm: NgForm) {
-    const lieu1: LieuReunion = new LieuReunion(this.lieuR1, null);
-    const lieu2: LieuReunion = new LieuReunion(this.lieuR2,null);
-    const lieu3: LieuReunion = new LieuReunion(this.lieuR3, null);
-    const lieux: LieuReunion[] = [lieu1, lieu2, lieu3];
+  private createSondageLieu(user: Utilisateur, sondageForm: NgForm) {
+    const place1: LieuReunion = new LieuReunion(this.placeR1);
+    const place2: LieuReunion = new LieuReunion(this.placeR2);
+    const place3: LieuReunion = new LieuReunion(this.placeR3);
+    const places: LieuReunion[] = [place1, place2, place3];
 
-    const sondageL: SondageLieu = new SondageLieu(this.lienS, utilisateur, lieux);
+    const sondageL: SondageLieu = new SondageLieu(this.linkS, user, places);
     this.apiService.createSondageLieu(sondageL).subscribe(data => {
-      console.log ('Sondage de type lieu crée : ' + data.lien);
+      alert ('Sondage de type lieu crée : ' + data.lien);
       this.resetForm(sondageForm);
     });
   }
 
-  private createSondageDate(utilisateur, sondageForm: NgForm) {
-    const dateR1: DateReunion = new DateReunion(this.date1, this.pauseDej1, null);
-    const dateR2: DateReunion = new DateReunion(this.date2, this.pauseDej2, null);
-    const dateR3: DateReunion = new DateReunion(this.date3, this.pauseDej3, null);
+  private createSondageDate(user: Utilisateur, sondageForm: NgForm) {
+    const dateR1: DateReunion = new DateReunion(this.date1.day + '-' + this.date1.month + '-' + this.date1.year, this.break1);
+    const dateR2: DateReunion = new DateReunion(this.date2.day + '-' + this.date2.month + '-' + this.date2.year, this.break2);
+    const dateR3: DateReunion = new DateReunion(this.date3.day + '-' + this.date3.month + '-' + this.date3.year, this.break3);
     const dates: DateReunion[] = [dateR1, dateR2, dateR3];
-    const sondageD: SondageDate = new SondageDate(this.lienS, utilisateur, dates);
+    const sondageD: SondageDate = new SondageDate(this.linkS, user, dates);
     this.apiService.createSondageDate(sondageD).subscribe(data => {
-      console.log('Sondage de type date crée : ' + data.lien);
+      alert ('Sondage de type date crée : ' + data.lien);
       this.resetForm(sondageForm);
     });
   }
@@ -73,5 +76,4 @@ export class SondageCreationComponent implements OnInit {
   resetForm(sondageForm: NgForm) {
     sondageForm.resetForm();
   }
-
 }

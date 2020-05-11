@@ -2,16 +2,12 @@ import {SondageLieu} from './sondage-lieu';
 
 export interface LieuDetails {
   nomLieu: string;
-  sondages: string[];
 }
 
 export class LieuReunion {
-  constructor(private nomLieu: string, private sondages: SondageLieu[]) {
+  constructor(private nomLieu: string) {
   }
   getNomLieu(): string {
     return this.nomLieu;
-  }
-  getSondages(): SondageLieu [] {
-    return this.sondages;
   }
 }

@@ -6,6 +6,20 @@
       "^/api/utilisateurs": ""
     }
   },
+  "/api/utilisateurs/allergies": {
+    "target": "http://localhost:8080/rest/utilisateur/allergies",
+    "secure": false,
+    "pathRewrite": {
+      "^/api/utilisateurs/allergies": ""
+    }
+  },
+  "/api/utilisateurs/preferences": {
+    "target": "http://localhost:8080/rest/utilisateur/preferences",
+    "secure": false,
+    "pathRewrite": {
+      "^/api/utilisateurs/preferences": ""
+    }
+  },
   "/api/sondagesLieux": {
     "target": "http://localhost:8080/rest/sondage/sondagesLieux",
     "secure": false,

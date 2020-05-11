@@ -3,11 +3,10 @@ import {SondageDate} from './sondage-date';
 export interface DateDetails {
   date: string;
   contientPauseDej: boolean;
-  sondages: string[];
 }
 
 export class DateReunion {
-  constructor(private date: string, private contientPauseDej: boolean, private sondages: SondageDate []) {
+  constructor(private date: string, private contientPauseDej: boolean) {
   }
   getDate(): string {
     return this.date;
@@ -15,9 +14,5 @@ export class DateReunion {
 
   getContientPauseDej(): boolean {
     return this.contientPauseDej;
-  }
-
-  getSondages(): SondageDate[] {
-    return this.sondages;
   }
 }

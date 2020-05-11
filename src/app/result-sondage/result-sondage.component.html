@@ -1,18 +1,41 @@
-<h1>Résultats des sondages </h1>
+<div class="text-center">
+  <h1 class="h4 mb-4"> Résultats des sondages </h1>
 
-<h2> Sondages Lieux </h2>
+  <p class="h4 mb-4">Sondages concernant des lieux </p>
 
-<ul>
-  <li *ngFor="let result of this.resultsSL" >
-        Pour le sondage {{result [0]}}, pour le lieu {{result[1]}} : {{result[2]}} vote(s)
-  </li>
-</ul>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col"> Sondage </th>
+      <th scope="col"> Lieu </th>
+      <th scope="col"> Nombre de votes </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let result of this.resultsSL">
+      <td> {{result[0]}} </td>
+      <td>{{result[1]}}</td>
+      <td>{{result[2]}}</td>
+    </tr>
+    </tbody>
+  </table>
 
+  <p class="h4 mb-4">Sondages concernant des dates </p>
 
-<h2> Sondages Dates </h2>
-
-<ul>
-  <li *ngFor="let result of this.resultsSD" >
-    Pour le sondage {{result [0]}}, pour la date {{result[1]}} : {{result[2]}} vote(s)
-  </li>
-</ul>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col"> Sondage </th>
+      <th scope="col"> Date </th>
+      <th scope="col"> Nombre de votes </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let result of this.resultsSD">
+      <td> {{result[0]}} </td>
+      <td>{{result[1]}}</td>
+      <td>{{result[2]}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

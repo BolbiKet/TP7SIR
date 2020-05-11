@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Utilisateur} from '../classes/utilisateur';
 import {APIService} from '../api.service';
-import {Subject} from 'rxjs';
 import {NgForm} from '@angular/forms';
-import {NgDecorator} from "@angular/core/schematics/utils/ng_decorators";
 
 @Component({
   selector: 'app-utilisateur-creation',
@@ -12,10 +10,10 @@ import {NgDecorator} from "@angular/core/schematics/utils/ng_decorators";
 })
 export class UtilisateurCreationComponent implements OnInit {
 
-  nomU: string = '';
-  prenomU: string = '';
-  mailU: string = '';
-  utilisateur: Utilisateur;
+  nameU = '';
+  firstNameU = '';
+  mailU = '';
+  user: Utilisateur;
   patternEmail = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
 
   constructor(private apiService: APIService) {
@@ -24,15 +22,15 @@ export class UtilisateurCreationComponent implements OnInit {
   ngOnInit() {
   }
 
-  saveUser(utilisateurForm: NgForm) {
-    this.utilisateur = new Utilisateur(this.nomU, this.prenomU, this.mailU, null);
-    this.apiService.createUser(this.utilisateur).subscribe(data => {
-      console.log('Utilisateur crée :' + data.mail);
-      this.resetForm(utilisateurForm);
+  saveUser(userForm: NgForm) {
+    this.user = new Utilisateur(this.nameU, this.firstNameU, this.mailU);
+    this.apiService.createUser(this.user).subscribe(data => {
+      alert ('Utilisateur crée : ' + data.mail);
+      this.resetForm(userForm);
     });
   }
-  resetForm(utilisateurForm: NgForm) {
-    utilisateurForm.resetForm();
+  resetForm(userForm: NgForm) {
+    userForm.resetForm();
   }
 }
 

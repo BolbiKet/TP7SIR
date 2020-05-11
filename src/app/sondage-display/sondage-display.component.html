@@ -1,32 +1,51 @@
-<h1> Sondages </h1>
+<div class="text-center">
+  <h1 class="h4 mb-4"> Sondages </h1>
 
-<h2> Sondages Lieux </h2>
+  <p class="h4 mb-4">Sondages concernant des lieux </p>
 
-<div>
-  <label *ngFor="let sondageL of this.sondagesLieux">
-    <b>Lien : </b>{{sondageL.getLien()}} <br>
-    <b>Mail du créateur : </b>{{sondageL.getCreateur()}} <br>
-    <br>
-    <b> Lieux : </b>
-    <label *ngFor="let lieu of sondageL.getLieux()">
-      {{lieu.getNomLieu()}} &nbsp;
-    </label>
-  </label>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col"> Lien du sondage </th>
+      <th scope="col"> Créateur </th>
+      <th scope="col"> Lieux proposés </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let sondage of this.sondagesLieux">
+      <td> {{sondage.getLien()}} </td>
+      <td>{{sondage.getCreateur()}}</td>
+      <td>
+        <div *ngFor="let lieu of sondage.getLieux()">
+          <span> {{lieu.getNomLieu()}} </span>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <p class="h4 mb-4">Sondages concernant des dates </p>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col"> Lien du sondage </th>
+      <th scope="col"> Créateur </th>
+      <th scope="col"> Dates proposées </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let sondage of this.sondagesDates">
+      <td> {{sondage.getLien()}} </td>
+      <td>{{sondage.getCreateur()}}</td>
+      <td>
+        <div *ngFor="let date of this.sondage.getDates()">
+          <span *ngIf="date.getContientPauseDej(); then pause else notPause"></span>
+          <ng-template #pause>{{date.getDate()}} (contient une pause déjeuner) </ng-template>
+          <ng-template #notPause>{{date.getDate()}}</ng-template>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
 </div>
-
-
-<h2> Sondages Dates </h2>
-
-<div>
-  <label *ngFor="let sondageD of this.sondagesDates">
-    <b>Lien : </b>{{sondageD.getLien()}} <br>
-    <b>Mail du créateur : </b>{{sondageD.getCreateur()}} <br>
-    <b> Dates : </b>
-    <label *ngFor="let date of sondageD.getDates()">
-      {{date.getDate()}} &nbsp;
-    </label>
-  </label>
-</div>
-
-
-

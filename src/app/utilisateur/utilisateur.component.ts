@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {APIService} from '../api.service';
-import {Utilisateur} from '../classes/utilisateur';
+import {UtilisateurDetails} from '../classes/utilisateur';
+import {Allergie} from '../classes/allergie';
+import {PrefAlim} from '../classes/pref-alim';
 
 @Component({
   selector: 'app-utilisateur',
@@ -8,13 +10,27 @@ import {Utilisateur} from '../classes/utilisateur';
   styleUrls: ['./utilisateur.component.css']
 })
 export class UtilisateurComponent implements OnInit {
-  utilisateurs: Utilisateur[] = [];
+  users: UtilisateurDetails[] = [];
 
   constructor(private apiService: APIService) { }
 
   ngOnInit() {
     this.apiService.getUtilisateurs().subscribe( res => {
-      this.utilisateurs = res.map(item => new Utilisateur(item.nom, item.prenom, item.mail, item.lienSondageCrees));
+      res.forEach((data) => {
+        const allergies: Allergie [] = [];
+        const preferences: PrefAlim [] = [];
+        if (data.allergies != null) {
+          data.allergies.forEach((a) => {
+            allergies.push(new Allergie(a.allergie));
+          });
+        }
+        if (data.preferences != null) {
+          data.preferences.forEach((p) => {
+            preferences.push(new PrefAlim(p.prefAlim));
+          });
+        }
+        this.users.push(new UtilisateurDetails(data.nom, data.prenom, data.mail, data.lienSondageCrees, allergies, preferences));
+      });
     });
   }
 }

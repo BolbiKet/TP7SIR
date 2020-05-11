@@ -1,8 +1,8 @@
 import {Utilisateur} from './utilisateur';
-import {DateReunion} from './date-reunion';
+import {DateDetails, DateReunion} from './date-reunion';
 
 export interface SondagesDatesResult {
-  dates ?: string[];
+  dates ?: DateDetails[];
   lien ?: string;
   utilisateur ?: Utilisateur;
 }

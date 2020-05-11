@@ -22,7 +22,7 @@ export class SondageDisplayComponent implements OnInit {
      res.forEach((e) => {
         const dates: DateReunion[] = [];
         e.dates.forEach((d) => {
-          dates.push(new DateReunion(d, null, null));
+          dates.push(new DateReunion(d.date, d.contientPauseDej));
         });
         this.sondagesDates.push(new SondageDate(e.lien, e.utilisateur, dates));
       });
@@ -32,7 +32,7 @@ export class SondageDisplayComponent implements OnInit {
       res.forEach((e) => {
         const lieux: LieuReunion[] = [];
         e.lieux.forEach((l) => {
-          lieux.push(new LieuReunion(l, null));
+          lieux.push(new LieuReunion(l.nomLieu));
         });
         this.sondagesLieux.push(new SondageLieu(e.lien, e.utilisateur, lieux));
       });

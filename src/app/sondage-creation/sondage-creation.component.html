@@ -1,14 +1,14 @@
-<h2> Création d'un sondage </h2>
+<form #sondageForm="ngForm" (ngSubmit)="createSondage(sondageForm)" class="text-center">
 
-<form #sondageForm="ngForm" (ngSubmit)="createSondage(sondageForm)">
+  <p class="h4 mb-4">Création d'un sondage</p>
 
-  <div class="form-group">
+  <div class="form-group mb-4">
     <label> Lien du sondage :
-      <input type="text" [(ngModel)]="lienS" name="lien" #lienSond="ngModel" required>
+      <input type="text" [(ngModel)]="linkS" name="lien" required>
     </label>
   </div>
 
-  <div class="form-group">
+  <div class="form-group mb-4">
     <label> Votre Mail :
       <input type="text" [(ngModel)]="mailC" [pattern]="patternEmail" #mailCrea="ngModel" name="lien" required>
     </label>
@@ -24,56 +24,59 @@
   </div>
 
   <div *ngIf="this.typeS == 'lieu'">
-    <div class="form-group">
+    <br>
+    <div class="form-group mb-4">
       <label> Lieu 1 :
-        <input type="text" [(ngModel)]="lieuR1" name="lieu1" required>
+        <input type="text" [(ngModel)]="placeR1" name="lieu1" required>
       </label>
     </div>
-    <div>
+    <div class="form-group mb-4">
       <label> Lieu 2 :
-        <input type="text" [(ngModel)]="lieuR2" name="lieu2" required>
+        <input type="text" [(ngModel)]="placeR2" name="lieu2" required>
       </label>
     </div>
-    <div>
+    <div class="form-group mb-4">
       <label> Lieu 3 :
-        <input type="text" [(ngModel)]="lieuR3" name="lieu3" required>
+        <input type="text" [(ngModel)]="placeR3" name="lieu3" required>
       </label>
     </div>
   </div>
 
   <div *ngIf="this.typeS == 'date'">
-    <div class="form-group">
-      <label> Date 1 :
-        <input type="text" [(ngModel)]="date1" #dateUne="ngModel" [pattern]="patternDate" name="date1" required>
+    <br>
+    <div class="form-group mb-4">
+      <label for="dateU"> Date 1 :
+        <input placeholder="yyyy-mm-dd" name="dateU" id="dateU" [(ngModel)]="date1" ngbDatepicker #d1="ngbDatepicker" readonly>
+        <button class="btn btn-outline-secondary" (click)="d1.toggle()" type="button">Chercher une date</button>
       </label>
-      <div>
-        <input type="checkbox" id="pauseDej1" name="pauseDej1" [(ngModel)]="pauseDej1">
-        <label for="pauseDej1">Contient une pause déjeuner</label>
+      <div class="form-group mb-4">
+        <input class="form-check-input" type="checkbox" id="pauseDej1" name="pauseDej1" [(ngModel)]="break1">
+        <label for="pauseDej1">Contient une pause déjeuner </label>
       </div>
     </div>
-    <div>
-      <label> Date 2 :
-        <input type="text" [(ngModel)]="date2" #dateDeux="ngModel" [pattern]="patternDate" name="date2" required>
+
+    <div class="form-group mb-4">
+      <label for="dateD"> Date 2 :
+        <input placeholder="yyyy-mm-dd" name="dateD" id="dateD" [(ngModel)]="date2" ngbDatepicker #d2="ngbDatepicker" readonly required="">
+        <button class="btn btn-outline-secondary" (click)="d2.toggle()" type="button">Chercher une date</button>
       </label>
-      <div>
-        <input type="checkbox" id="pauseDej2" name="pauseDej2" [(ngModel)]="pauseDej2">
+      <div class="form-group mb-4">
+        <input class="form-check-input" type="checkbox" id="pauseDej2" name="pauseDej2" [(ngModel)]="break2">
         <label for="pauseDej2">Contient une pause déjeuner </label>
       </div>
     </div>
-    <div>
-      <label> Date 3 :
-        <input type="text" [(ngModel)]="date3" #dateTrois="ngModel" [pattern]="patternDate" name="date3" required>
+
+    <div class="form-group mb-4">
+      <label for="dateT"> Date 3 :
+        <input placeholder="yyyy-mm-dd" name="dateT" id="dateT" [(ngModel)]="date3" ngbDatepicker #d="ngbDatepicker" readonly required>
+        <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">Chercher une date</button>
       </label>
-      <div>
-        <input type="checkbox" id="pauseDej3" name="pauseDej3" [(ngModel)]="pauseDej3">
+      <div class="form-group mb-4">
+        <input class="form-check-input" type="checkbox" id="pauseDej3" name="pauseDej3" [(ngModel)]="break3">
         <label for="pauseDej3">Contient une pause déjeuner </label>
       </div>
     </div>
-    <div *ngIf="dateUne.errors?.pattern || dateDeux.errors?.pattern || dateTrois.errors?.pattern">
-      <span class="text-danger">
-         Le format de date attendu est dd-mm-yyyy
-      </span>
-    </div>
+
   </div>
   <br>
   <br>
@@ -94,7 +97,6 @@
 
   <div class="form-group">
     <button class="btn btn-primary" [disabled]="!sondageForm.form.valid"> Valider </button>
-    &nbsp;
     <button type="button" class="btn btn-danger" (click)="resetForm(sondageForm)"> Vider les champs</button>
   </div>
 </form>

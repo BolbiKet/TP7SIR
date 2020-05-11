@@ -1,26 +1,22 @@
-<h2> Participer à un sondage </h2>
+<form #participationForm="ngForm" (ngSubmit)="participateSondage(participationForm)" class="text-center">
 
-<form #participationForm="ngForm" (ngSubmit)="participerSondage(participationForm)">
+  <p class="h4 mb-4">Participation à un sondage </p>
 
-  <div>
-    <label> Votre nom :
-      <input type="text" [(ngModel)]="nomP" name="nomPart" required>
-    </label>
+  <div class="form-group mb-4">
+    <label for="Nom"> Nom : </label>
+    <input type="text" [(ngModel)]="nameP" name="Nom" id="Nom">
   </div>
 
-  <div>
-    <label> Votre prénom :
-      <input type="text" [(ngModel)]="prenomP" name="prenomPart" required>
-    </label>
+  <div class="form-group mb-4">
+    <label for="Prenom"> Prenom : </label>
+    <input type="text" [(ngModel)]="lastNameP" name="Prenom" id="Prenom">
   </div>
 
-  <div>
+  <div class="form-group mb-4">
     <label> Votre mail :
-      <input type="text" [(ngModel)]="mailP" name="mailPart" required>
+      <input type="text" [(ngModel)]="mailP" name="mailPart" [pattern]="patternEmail" #emailP="ngModel" required>
     </label>
   </div>
-
-  <br>
 
   <div class="custom-control custom-radio custom-control-inline">
     <input type="radio" class="custom-control-input" id="sondageDate" name="sondageDate" value="date" [(ngModel)]="typeS" required>
@@ -32,51 +28,58 @@
     <label class="custom-control-label" for="sondageLieu">Sondage de type Lieu</label>
   </div>
 
-  <br>
-
-  <div *ngIf="typeS == 'date'">
+  <div class="form-group mb-4" *ngIf="typeS == 'date'">
     <br>
-    <label> Choisissez un sondage :
-      <select [(ngModel)]="lienSondageD" (ngModelChange)="chercherDates()" name="sondage">
+    <label for="sondageD"> Choisissez un sondage :
+      <select class="custom-select mr-sm-2" [(ngModel)]="linkSD" (ngModelChange)="searchDates()" name="sondageD" id="sondageD" required>
         <option [value]="sondage.getLien()" *ngFor="let sondage of this.listSD">
           {{sondage.getLien()}}
         </option>
       </select>
     </label>
 
-    <label> Choisissez une date  :
-      <select [(ngModel)]="dateChoisie" name="date">
-        <option *ngFor="let date of this.dates">
-          {{date}}
+    <label for="date"> Choisissez une date  :
+      <select class="custom-select mr-sm-2" [(ngModel)]="chosenDate" name="date" id="date" required>
+        <option [value]="date.getDate()" *ngFor="let date of this.dates">
+          {{date.getDate()}}
         </option>
       </select>
     </label>
   </div>
 
-  <br>
-  <div *ngIf="typeS == 'lieu'">
-    <label> Choisissez un sondage :
-      <select [(ngModel)]="lienSondageL" (ngModelChange)="chercherLieux()" name="sondage">
+  <div class="form-group mb-4" *ngIf="typeS == 'lieu'">
+    <br>
+    <label for="sondage"> Choisissez un sondage :
+      <select class="custom-select mr-sm-2" [(ngModel)]="linkSL" (ngModelChange)="searchPlaces()" name="sondage" id="sondage" required>
         <option [value]="sondage.getLien()" *ngFor="let sondage of this.listSL">
           {{sondage.getLien()}}
         </option>
       </select>
     </label>
 
-    <label> Choisissez un lieu  :
-      <select [(ngModel)]="lieuChoisi" name="lieu">
-        <option *ngFor="let lieu of this.lieux">
-          {{lieu}}
+    <label for="lieu"> Choisissez un lieu  :
+      <select class="custom-select mr-sm-2" [(ngModel)]="chosenPlace" name="lieu" id="lieu" required>
+        <option [value]="lieu.getNomLieu()" *ngFor="let lieu of this.places">
+          {{lieu.getNomLieu()}}
         </option>
       </select>
     </label>
   </div>
-  <br>
 
-  <div class="form-group">
+  <div *ngIf="emailP.errors?.required">
+    <span class="text-danger">
+      L'email est obligatoire
+    </span>
+  </div>
+
+  <div *ngIf="emailP.errors?.pattern">
+    <span class="text-danger">
+      Le format de l'email est invalide
+    </span>
+  </div>
+
+  <div class="form-group mb-4">
     <button class="btn btn-primary" [disabled]="!participationForm.form.valid"> Valider </button>
     <button type="button" class="btn btn-danger" (click)="resetForm(participationForm)"> Vider les champs</button>
   </div>
-
-
 </form>

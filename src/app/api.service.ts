@@ -65,4 +65,10 @@ export class APIService {
   createParticipationSD(participationSD: ParticipationSD) {
     return this.httpClient.post(this.url + 'participationSondageDates', participationSD);
   }
+  postAllergies(allergies, id) {
+    return this.httpClient.post(this.url + 'utilisateurs/allergies/' + id, allergies);
+  }
+  postPrefAlim(preferences, id) {
+    return this.httpClient.post(this.url + 'utilisateurs/preferences/' + id, preferences);
+  }
 }

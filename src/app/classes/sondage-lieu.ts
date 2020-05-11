@@ -1,9 +1,9 @@
 import {Utilisateur} from './utilisateur';
-import {LieuReunion} from './lieu-reunion';
+import {LieuDetails, LieuReunion} from './lieu-reunion';
 
 export interface SondagesLieuxResult {
   lien ?: string;
-  lieux ?: string[];
+  lieux ?: LieuDetails[];
   utilisateur ?: Utilisateur;
 }
 

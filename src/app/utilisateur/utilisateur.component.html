@@ -1,11 +1,38 @@
-<h1> Utilisateurs </h1>
+<div class="text-center">
+  <p class="h4 mb-4">Utilisateurs de notre application </p>
 
-<label *ngFor="let utilisateur of this.utilisateurs">
-  <b>Nom : </b>{{utilisateur.getNom()}} <br>
-  <b> Prenom : </b>{{utilisateur.getPrenom()}} <br>
-  <b> Mail : </b>{{utilisateur.getMail()}} <br>
-  <b> Sondages crées : </b>
-  <label *ngFor="let sondage of utilisateur.getSondagesCrees()">
-      {{sondage}} &nbsp;
-  </label>
-</label>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col"> Nom </th>
+      <th scope="col"> Prénom </th>
+      <th scope="col"> Mail </th>
+      <th scope="col"> Sondage(s) crée(s)</th>
+      <th scope="col"> Allergies </th>
+      <th scope="col"> Préférences alimentaires</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let utilisateur of this.users">
+      <td> {{utilisateur.getNom()}} </td>
+      <td>{{ utilisateur.getPrenom() }}</td>
+      <td>{{ utilisateur.getMail() }}</td>
+      <td>
+        <div *ngFor="let sondage of utilisateur.getSondages()">
+          <span> {{sondage}} </span>
+        </div>
+       </td>
+      <td>
+        <div *ngFor="let al of utilisateur.getAllergies()">
+          <span> {{al.getAllergie()}} </span>
+        </div>
+      </td>
+      <td>
+        <div *ngFor="let pref of utilisateur.getPrefAlims()">
+          <span> {{pref.getPrefAlim()}} </span>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

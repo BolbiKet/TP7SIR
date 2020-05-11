@@ -3,7 +3,7 @@ import {NgForm} from '@angular/forms';
 import {SondageLieu} from '../classes/sondage-lieu';
 import {SondageDate} from '../classes/sondage-date';
 import {DateReunion} from '../classes/date-reunion';
-import {LieuReunion} from '../classes/lieu-reunion';
+import {LieuDetails, LieuReunion} from '../classes/lieu-reunion';
 import {APIService} from '../api.service';
 import {Utilisateur} from '../classes/utilisateur';
 import {ParticipationSL} from '../classes/participation-sl';
@@ -15,72 +15,103 @@ import {ParticipationSD} from '../classes/participation-sd';
   styleUrls: ['./sondage-participation.component.css']
 })
 export class SondageParticipationComponent implements OnInit {
-  nomP = '';
-  prenomP = '';
+  nameP = '';
+  lastNameP = '';
   mailP = '';
   typeS = '';
   listSL: SondageLieu [] = [];
   listSD: SondageDate [] = [];
-  dates: string[] = [];
-  lieux: string [] = [];
-  lienSondageL: string;
-  lienSondageD: string;
-  sondageChoisiL: SondageLieu;
-  sondageChoisiD: SondageDate;
-  lieuChoisi: string;
-  dateChoisie: string;
+  dates: DateReunion [] = [];
+  places: LieuReunion [] = [];
+  linkSL: string;
+  linkSD: string;
+  chosenSL: SondageLieu;
+  chosenSD: SondageDate;
+  chosenPlace: string;
+  chosenDate: string;
+  patternEmail = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
 
   constructor(private apiService: APIService) { }
 
   ngOnInit() {
     this.apiService.getSondagesLieux().subscribe(res => {
-      this.listSL = res.map(item => new SondageLieu(item.lien, item.utilisateur, null));
+      const places: LieuReunion[] = [];
+      res.forEach((s) => {
+        s.lieux.forEach((l) => {
+         const place = new LieuReunion(l.nomLieu);
+         places.push(place);
+        });
+        this.listSL.push(new SondageLieu(s.lien, s.utilisateur, places));
+      });
     });
     this.apiService.getSondagesDates().subscribe(res => {
-      this.listSD = res.map(item => new SondageDate(item.lien, item.utilisateur, null));
+      const dates: DateReunion[] = [];
+      res.forEach((s) => {
+        s.dates.forEach((d) => {
+          const date = new DateReunion(d.date, d.contientPauseDej);
+          dates.push(date);
+        });
+        this.listSD.push(new SondageDate(s.lien, s.utilisateur, dates));
+      });
     });
   }
 
-  participerSondage(participationForm: NgForm) {
+  participateSondage(participationForm: NgForm) {
     this.apiService.getUtilisateur(this.mailP).subscribe(data => {
-      const utilisateur: Utilisateur = new Utilisateur(data.nom, data.prenom, data.mail, null);
+      const user = new Utilisateur(data.nom, data.prenom, data.mail);
       if (this.typeS === 'lieu') {
-        this.participerSL(utilisateur, participationForm);
+        this.participateSL(user, participationForm);
       } else {
-        this.participerSD(utilisateur, participationForm);
+        this.participateSD(user, participationForm);
       }
     });
   }
 
-  private participerSL(utilisateur, partForm: NgForm) {
-    const date = new LieuReunion(this.lieuChoisi, null);
-    const participation: ParticipationSL = new ParticipationSL(this.nomP, this.prenomP, utilisateur, date, this.sondageChoisiL);
-    this.apiService.createParticipationSL(participation).subscribe(res => {
-      console.log ('Participation enregistrée');
-      this.resetForm(partForm);
+  private participateSL(user: Utilisateur, partForm: NgForm) {
+    this.apiService.getLieu(this.chosenSL.getLien(), this.chosenPlace).subscribe(res => {
+      const place = new LieuReunion(res.nomLieu);
+      const participation: ParticipationSL = new ParticipationSL(this.nameP, this.lastNameP, user, place, this.chosenSL);
+      this.apiService.createParticipationSL(participation).subscribe(data  => {
+        alert('Participation enregistrée');
+        this.resetForm(partForm);
+      });
     });
   }
 
-  private participerSD(utilisateur, partForm: NgForm) {
-    const dateR: DateReunion = new DateReunion(this.dateChoisie, null, null);
-    const participation: ParticipationSD = new ParticipationSD (this.nomP, this.prenomP, utilisateur, dateR, this.sondageChoisiD);
-    this.apiService.createParticipationSD(participation).subscribe(data => {
-      console.log ('Participation enregistrée');
-      this.resetForm(partForm);
+  private participateSD(user: Utilisateur, partForm: NgForm) {
+    this.apiService.getDate(this.chosenSD.getLien(), this.chosenDate).subscribe(res => {
+      const date = new DateReunion(res.date, res.contientPauseDej);
+      const participation: ParticipationSD = new ParticipationSD (this.nameP, this.lastNameP, user, date, this.chosenSD);
+      this.apiService.createParticipationSD(participation).subscribe(data => {
+        alert('Participation enregistrée');
+        this.resetForm(partForm);
+      });
     });
   }
 
-  chercherLieux() {
-    this.apiService.getSondageLieuByLien(this.lienSondageL).subscribe(data => {
-      this.sondageChoisiL = new SondageLieu(data.lien, null, null);
-      this.lieux = data.lieux;
+  searchPlaces() {
+    this.places.splice(0, this.places.length);
+    this.apiService.getSondageLieuByLien(this.linkSL).subscribe(data => {
+      data.lieux.forEach((l) => {
+        this.places.push(new LieuReunion(l.nomLieu));
+      });
+      this.apiService.getUtilisateur(data.utilisateur).subscribe(u => {
+        const user = new Utilisateur(u.nom, u.prenom, u.mail);
+        this.chosenSL = new SondageLieu(data.lien, user, this.places);
+      });
     });
   }
 
-  chercherDates() {
-    this.apiService.getSondageDatesByLien(this.lienSondageD).subscribe(data => {
-      this.sondageChoisiD = new SondageDate(data.lien, null, null);
-      this.dates = data.dates;
+  searchDates() {
+    this.dates.splice(0, this.places.length);
+    this.apiService.getSondageDatesByLien(this.linkSD).subscribe(data => {
+      data.dates.forEach((d) => {
+        this.dates.push(new DateReunion(d.date, d.contientPauseDej));
+      });
+      this.apiService.getUtilisateur(data.utilisateur).subscribe(u => {
+        const user = new Utilisateur(u.nom, u.prenom, u.mail);
+        this.chosenSD = new SondageDate(data.lien, user, this.dates);
+      });
     });
   }
 

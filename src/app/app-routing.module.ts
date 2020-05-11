@@ -6,7 +6,8 @@ import {UtilisateurComponent} from './utilisateur/utilisateur.component';
 import {UtilisateurCreationComponent} from './utilisateur-creation/utilisateur-creation.component';
 import {SondageDisplayComponent} from './sondage-display/sondage-display.component';
 import {SondageParticipationComponent} from './sondage-participation/sondage-participation.component';
-import {ResultSondageComponent} from "./result-sondage/result-sondage.component";
+import {ResultSondageComponent} from './result-sondage/result-sondage.component';
+import {AddAllergiesComponent} from './add-allergies/add-allergies.component';
 
 const routes: Routes = [
   {path: 'utilisateurs', component: UtilisateurComponent},
@@ -14,7 +15,8 @@ const routes: Routes = [
   {path: 'sondages', component: SondageDisplayComponent},
   {path: 'sondage', component: SondageCreationComponent},
   {path: 'participation', component: SondageParticipationComponent},
-  {path: 'resultats', component: ResultSondageComponent}
+  {path: 'resultats', component: ResultSondageComponent},
+  {path: 'food', component: AddAllergiesComponent}
 ];
 
 @NgModule({
