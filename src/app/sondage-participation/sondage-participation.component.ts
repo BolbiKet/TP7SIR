@@ -3,7 +3,7 @@ import {NgForm} from '@angular/forms';
 import {SondageLieu} from '../classes/sondage-lieu';
 import {SondageDate} from '../classes/sondage-date';
 import {DateReunion} from '../classes/date-reunion';
-import {LieuDetails, LieuReunion} from '../classes/lieu-reunion';
+import {LieuReunion} from '../classes/lieu-reunion';
 import {APIService} from '../api.service';
 import {Utilisateur} from '../classes/utilisateur';
 import {ParticipationSL} from '../classes/participation-sl';
@@ -103,7 +103,7 @@ export class SondageParticipationComponent implements OnInit {
   }
 
   searchDates() {
-    this.dates.splice(0, this.places.length);
+    this.dates.splice(0, this.dates.length);
     this.apiService.getSondageDatesByLien(this.linkSD).subscribe(data => {
       data.dates.forEach((d) => {
         this.dates.push(new DateReunion(d.date, d.contientPauseDej));
